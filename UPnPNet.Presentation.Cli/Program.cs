@@ -28,7 +28,7 @@ namespace UPnPNet.Presentation.Cli
             {
                 //SearchTarget = DiscoverySearchTargetFactory.ServiceTypeSearch("AVTransport", "1")
                 SearchTarget = DiscoverySearchTargetFactory.AllSearch(),
-                WaitTimeInSeconds = 5
+                WaitTimeInSeconds = 2
             };
             IList<UPnPDevice> devices = discovery.Search().Result;
 
