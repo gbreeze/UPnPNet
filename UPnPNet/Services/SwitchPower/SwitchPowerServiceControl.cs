@@ -16,26 +16,19 @@ namespace UPnPNet.Services.SwitchPower
             }
         }
 
-        public async Task SetLightState(int instanceId, int volume)
+        public async Task SetLightState(bool state)
         {
-            if (volume < 0)
-                throw new ArgumentOutOfRangeException(nameof(volume), "Must be greater or equal to zero");
-
-            await SendAction("SetVolume", new Dictionary<string, string>
+            await SendAction("SetTarget", new Dictionary<string, object>
             {
-                {"InstanceID", instanceId.ToString()},
-                {"DesiredVolume", volume.ToString() }
+                {"newTargetValue", state.ToString()}
             });
         }
 
-        public async Task<int> GetLightState(int instanceId)
+        public async Task<bool> GetLightState()
         {
-            IDictionary<string, string> result = await SendAction("SetVolume", new Dictionary<string, string>
-            {
-                {"InstanceID", instanceId.ToString()}
-            });
+            IDictionary<string, string> result = await SendAction("GetStatus");
 
-            return int.Parse(result["CurrentVolume"]);
+            return Convert.ToBoolean(int.Parse(result["ResultStatus"]));
         }
     }
 }

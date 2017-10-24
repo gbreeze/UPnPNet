@@ -9,7 +9,7 @@ namespace UPnPNet.Soap
 {
 	public class SoapRequest
 	{
-		public IDictionary<string, string> Arguments { get; set; } = new Dictionary<string, string>();
+		public IDictionary<string, object> Arguments { get; set; } = new Dictionary<string, object>();
 		public string ControlUrl { get; set; }
 		public string Action { get; set; }
 		public string ServiceType { get; set; }
@@ -18,8 +18,7 @@ namespace UPnPNet.Soap
 		{
 			XNamespace ns = "http://schemas.xmlsoap.org/soap/envelope/";
 			XNamespace serviceNs = ServiceType;
-
-			IList<XElement> xArguments = Arguments.Select(x => new XElement(x.Key, x.Value)).ToList();
+			IList<XElement> xArguments = Arguments?.Select(x => new XElement(x.Key, x.Value)).ToList();
 			XElement actionElement = new XElement(serviceNs + Action, new XAttribute(XNamespace.Xmlns + "u", serviceNs), xArguments);
 			XElement bodyElement = new XElement(ns + "Body", actionElement);
 			XElement envelopeElement = new XElement(ns + "Envelope", new XAttribute(XNamespace.Xmlns + "s", ns), bodyElement);

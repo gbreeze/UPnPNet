@@ -20,7 +20,7 @@ namespace UPnPNet
 			Service = service;
 		}
 
-		public async Task<IDictionary<string, string>> SendAction(string action, IDictionary<string, string> arguments)
+		public async Task<IDictionary<string, string>> SendAction(string action, IDictionary<string, object> arguments = null)
 		{
 			SoapClient client = new SoapClient()
 			{

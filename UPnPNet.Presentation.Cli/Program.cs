@@ -43,7 +43,7 @@ namespace UPnPNet.Presentation.Cli
             {
                 // do something
                 var control = new SwitchPowerServiceControl(NetworkLight);
-                Console.WriteLine("Type 'A' to set on the lights. 'Q' to exit.");
+                Console.WriteLine("Type 'A' to set on the lights, 'B' to sot the lights off. 'C' toggles the light, 'Q' to exit.");
 
                 while (true)
                 {
@@ -54,10 +54,14 @@ namespace UPnPNet.Presentation.Cli
                         case ConsoleKey.Q:
                             return;
                         case ConsoleKey.A:
-                            control.SendAction("SetTarget", new Dictionary<string, string>() { { "newTargetValue", "True" } }).Wait();
+                            control.SendAction("SetTarget", new Dictionary<string, object>() { { "newTargetValue", "True" } }).Wait();
                             break;
-                        case ConsoleKey.S:
-
+                        case ConsoleKey.B:
+                            control.SendAction("SetTarget", new Dictionary<string, object>() { { "newTargetValue", "False" } }).Wait();
+                            break;
+                        case ConsoleKey.C:
+                            var state = control.GetLightState().Result;
+                            control.SetLightState(!state).Wait();
                             break;
                     }
                 }
