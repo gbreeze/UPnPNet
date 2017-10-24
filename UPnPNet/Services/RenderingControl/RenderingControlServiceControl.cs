@@ -20,7 +20,7 @@ namespace UPnPNet.Services.RenderingControl
 			if (volume < 0)
 				throw new ArgumentOutOfRangeException(nameof(volume), "Must be greater or equal to zero");
 
-			await SendAction("SetVolume", new Dictionary<string, string>
+			await SendAction("SetVolume", new Dictionary<string, object>
 			{
 				{"InstanceID", instanceId.ToString()},
 				{"Channel", channel.Value},
@@ -30,7 +30,7 @@ namespace UPnPNet.Services.RenderingControl
 
 		public async Task<int> GetVolume(int instanceId, RenderingControlChannel channel)
 		{
-			IDictionary<string, string> result = await SendAction("SetVolume", new Dictionary<string, string>
+			IDictionary<string, string> result = await SendAction("SetVolume", new Dictionary<string, object>
 			{
 				{"InstanceID", instanceId.ToString()},
 				{"Channel", channel.Value}

@@ -30,7 +30,7 @@ namespace UPnP.Test.Unit.Soap
 				Action = "SomeAction",
 				ServiceType = "SomeServiceType",
 				ControlUrl = "/SomeUrl",
-				Arguments = new Dictionary<string, string> { { "SomeArgument", "SomeValue"} }
+				Arguments = new Dictionary<string, object> { { "SomeArgument", "SomeValue"} }
 			};
 
 			string body = request.GetBody();

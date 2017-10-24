@@ -17,12 +17,12 @@ namespace UPnPNet.Services.AvTransport
 
 		public Task Stop(int instanceId)
 		{
-			return SendAction("Stop", new Dictionary<string, string> { { "InstanceID", instanceId.ToString() } });
+			return SendAction("Stop", new Dictionary<string, object> { { "InstanceID", instanceId.ToString() } });
 		}
 
 		public Task Play(int instanceId, int speed)
 		{
-			return SendAction("Play", new Dictionary<string, string>
+			return SendAction("Play", new Dictionary<string, object>
 			{
 				{ "InstanceID", instanceId.ToString()},
 				{ "Speed", speed.ToString() }
@@ -31,22 +31,22 @@ namespace UPnPNet.Services.AvTransport
 
 		public Task Pause(int instanceId)
 		{
-			return SendAction("Pause", new Dictionary<string, string> { { "InstanceID", instanceId.ToString() } });
+			return SendAction("Pause", new Dictionary<string, object> { { "InstanceID", instanceId.ToString() } });
 		}
 
 		public Task Next(int instanceId)
 		{
-			return SendAction("Next", new Dictionary<string, string> { { "InstanceID", instanceId.ToString() } });
+			return SendAction("Next", new Dictionary<string, object> { { "InstanceID", instanceId.ToString() } });
 		}
 
 		public Task Previous(int instanceId)
 		{
-			return SendAction("Previous", new Dictionary<string, string> { { "InstanceID", instanceId.ToString() } });
+			return SendAction("Previous", new Dictionary<string, object> { { "InstanceID", instanceId.ToString() } });
 		}
 
 		public Task SetPlayMode(int instanceId, AvTransportPlayMode playMode)
 		{
-			return SendAction("SetPlayMode", new Dictionary<string, string>
+			return SendAction("SetPlayMode", new Dictionary<string, object>
 			{
 				{ "InstanceID", instanceId.ToString() },
 				{ "NewPlayMode", playMode.Value }
