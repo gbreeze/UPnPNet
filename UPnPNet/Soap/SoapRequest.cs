@@ -36,8 +36,8 @@ namespace UPnPNet.Soap
 			{
 				document.Save(xmlWriter);
 			}
-
-			return writer.ToString();
+            var v = writer.ToString();
+            return v;
 		}
 	}
 

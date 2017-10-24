@@ -6,6 +6,7 @@ using UPnPNet.Discovery;
 using UPnPNet.Discovery.SearchTargets;
 using UPnPNet.Models;
 using UPnPNet.Services.AvTransport;
+using UPnPNet.Services.SwitchPower;
 
 namespace UPnPNet.Presentation.Cli
 {
@@ -36,6 +37,31 @@ namespace UPnPNet.Presentation.Cli
 
             devices.Foreach((i) => PrintDevice(i));
 
+
+            var NetworkLight = devices.SelectMany(s => s.Services).FirstOrDefault(s => s.Type == "urn:schemas-upnp-org:service:SwitchPower:1");
+            if (NetworkLight != null)
+            {
+                // do something
+                var control = new SwitchPowerServiceControl(NetworkLight);
+                Console.WriteLine("Type 'A' to set on the lights. 'Q' to exit.");
+
+                while (true)
+                {
+                    ConsoleKeyInfo info = Console.ReadKey();
+
+                    switch (info.Key)
+                    {
+                        case ConsoleKey.Q:
+                            return;
+                        case ConsoleKey.A:
+                            control.SendAction("SetTarget", new Dictionary<string, string>() { { "newTargetValue", "True" } }).Wait();
+                            break;
+                        case ConsoleKey.S:
+
+                            break;
+                    }
+                }
+            }
 
             //UPnPServer server = new UPnPServer();
 

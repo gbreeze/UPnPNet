@@ -2,6 +2,9 @@
 	<PropertyGroup>
 		<TargetFramework>netcoreapp1.0</TargetFramework>
 	</PropertyGroup>
+	<ItemGroup>
+	  <None Include="..\.gitignore" Link=".gitignore" />
+	</ItemGroup>
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.AspNetCore.Server.Kestrel" Version="1.1.1" />
